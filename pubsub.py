@@ -23,7 +23,7 @@ class Bus:
         sub_list = self.room_dict.setdefault(room)
         if sub_list is not None:
             for sub in sub_list:
-                sub.update(publisher.name, room, msg)
+                sub.get_msg(publisher.name, room, msg)
 
     def subscriber(self, room, subscriber):
         """
@@ -119,3 +119,9 @@ class Subscriber:
         """
         print("Subscriber {} room {} get a message: \"{}\" from the publisher {}".format(
             self.name, room, msg, publisher_name))
+
+
+if __name__ == "__main__":
+    import doctest
+
+    doctest.testfile("test.txt")

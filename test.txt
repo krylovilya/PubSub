@@ -1,0 +1,20 @@
+Тест pubsub.py. Необходимо запустить интерпретатор с ключом -v
+
+>>> from pubsub import Bus, Publisher, Subscriber
+>>> bus = Bus()
+>>> bus.add_room("Krasnoyarsk")
+>>> bus.add_room("Irkutsk")
+>>> krasnoyarsk_mchs = Publisher("Krasnoyarsk MCHS")
+>>> irkutsk_mchs = Publisher("Irkutsk MCHS")
+>>> ivan = Subscriber("Ivan")
+>>> petya = Subscriber("Petya")
+>>> ivan.subscriber(bus, "Krasnoyarsk")
+>>> petya.subscriber(bus, "Irkutsk")
+>>> krasnoyarsk_mchs.publish(bus, "Krasnoyarsk", "Tomorrow strong wind, 20 m/s")
+Subscriber Ivan room Krasnoyarsk get a message: "Tomorrow strong wind, 20 m/s" from the publisher Krasnoyarsk MCHS
+>>> irkutsk_mchs.publish(bus, "Irkutsk", "Tomorrow a very strong wind, 25 m/s")
+Subscriber Petya room Irkutsk get a message: "Tomorrow a very strong wind, 25 m/s" from the publisher Irkutsk MCHS
+>>> krasnoyarsk_mchs.publish(bus, "some room", "some msg")
+>>> anon = Subscriber()
+>>> anon.subscriber(bus, "some room")
+[Bus] Room does not exist.
